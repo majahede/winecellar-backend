@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Winecellar.Commands;
 using Winecellar.Queries;
 
 namespace Winecellar.Controllers
@@ -18,6 +19,16 @@ namespace Winecellar.Controllers
             var wines = await _mediator.Send(new GetWinesQuery());
 
             return Ok(wines);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddProduct([FromBody] Wine wine)
+        {
+            {
+                await _mediator.Send(new AddWineCommand(wine));
+
+                return StatusCode(201);
+            }
         }
     }
 }
