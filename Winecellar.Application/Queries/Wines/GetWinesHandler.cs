@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Winecellar.Queries;
+using Winecellar.Application.Models;
 
-namespace Winecellar.Handlers
+namespace Winecellar.Application.Queries.Wines
 {
     public class GetWinesHandler : IRequestHandler<GetWinesQuery, IEnumerable<Wine>>
     {

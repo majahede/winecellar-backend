@@ -1,4 +1,4 @@
-namespace Winecellar
+namespace Winecellar.Application.Models
 {
     public class Wine
     {

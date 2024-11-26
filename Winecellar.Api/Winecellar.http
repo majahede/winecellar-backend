@@ -1,6 +1,6 @@
 @Winecellar_HostAddress = http://localhost:5247
 
-GET {{Winecellar_HostAddress}}/weatherforecast/
+GET {{Winecellar_HostAddress}}/winecellar/
 Accept: application/json
 
 ###

@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using Winecellar.Commands;
 
-namespace Winecellar.Handlers
+namespace Winecellar.Application.Commands.Wines
 {
     public class AddWineHandler : IRequestHandler<AddWineCommand>
     {

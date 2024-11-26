@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Winecellar.Commands;
-using Winecellar.Queries;
+using Winecellar.Application.Queries.Wines;
+using Winecellar.Application.Commands.Wines;
+using Winecellar.Application.Models;
 
 namespace Winecellar.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class WinesController : ControllerBase
     {

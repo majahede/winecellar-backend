@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar", "Winecellar\Winecellar.csproj", "{D9AA935E-36BB-4AEC-992D-6A3CD1319445}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Api", "Winecellar.Api\Winecellar.Api.csproj", "{D9AA935E-36BB-4AEC-992D-6A3CD1319445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Application", "Winecellar.Application\Winecellar.Application.csproj", "{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D9AA935E-36BB-4AEC-992D-6A3CD1319445}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9AA935E-36BB-4AEC-992D-6A3CD1319445}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9AA935E-36BB-4AEC-992D-6A3CD1319445}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

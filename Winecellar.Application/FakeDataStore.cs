@@ -1,4 +1,6 @@
-﻿namespace Winecellar
+﻿using Winecellar.Application.Models;
+
+namespace Winecellar
 {
     public class FakeDataStore
     {
