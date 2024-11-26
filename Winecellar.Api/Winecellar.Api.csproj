@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DependencyInjection\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Winecellar.Application\Winecellar.Application.csproj" />
   </ItemGroup>
 
