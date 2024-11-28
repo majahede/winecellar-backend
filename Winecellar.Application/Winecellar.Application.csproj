@@ -10,4 +10,14 @@
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Dtos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Winecellar.Domain\Winecellar.Domain.csproj" />
+    <ProjectReference Include="..\Winecellar.Infrastructure\Winecellar.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

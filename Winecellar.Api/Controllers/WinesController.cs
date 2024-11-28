@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Winecellar.Application.Queries.Wines;
 using Winecellar.Application.Commands.Wines;
-using Winecellar.Application.Models;
+using Winecellar.Domain.Models;
 
 namespace Winecellar.Controllers
 {

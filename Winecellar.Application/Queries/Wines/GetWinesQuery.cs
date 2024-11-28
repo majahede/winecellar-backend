@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using Winecellar.Application.Models;
+using Winecellar.Domain.Models;
 
 namespace Winecellar.Application.Queries.Wines
 {
