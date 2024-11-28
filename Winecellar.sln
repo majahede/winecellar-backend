@@ -7,6 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Api", "Winecella
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Application", "Winecellar.Application\Winecellar.Application.csproj", "{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Infrastructure", "Winecellar.Infrastructure\Winecellar.Infrastructure.csproj", "{4768C3AD-6D32-4966-8261-45D22EB9F00C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{ADC03FE8-AE7F-4997-85D7-03F6C58CBE61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7A24F2EA-7DA6-407A-B018-EDD0B0F395A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9BE8081B-6AC0-4295-BDA3-1027D9DCF768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Persistence", "Winecellar.Persistence\Winecellar.Persistence.csproj", "{C00D5884-B2CD-4330-8494-AD62D3278C5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winecellar.Domain", "Winecellar.Domain\Winecellar.Domain.csproj", "{8BF478A5-F42B-4B16-A6FA-103A7C2C7562}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +33,27 @@ Global
 		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4768C3AD-6D32-4966-8261-45D22EB9F00C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4768C3AD-6D32-4966-8261-45D22EB9F00C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4768C3AD-6D32-4966-8261-45D22EB9F00C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4768C3AD-6D32-4966-8261-45D22EB9F00C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C00D5884-B2CD-4330-8494-AD62D3278C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C00D5884-B2CD-4330-8494-AD62D3278C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C00D5884-B2CD-4330-8494-AD62D3278C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C00D5884-B2CD-4330-8494-AD62D3278C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF478A5-F42B-4B16-A6FA-103A7C2C7562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF478A5-F42B-4B16-A6FA-103A7C2C7562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF478A5-F42B-4B16-A6FA-103A7C2C7562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF478A5-F42B-4B16-A6FA-103A7C2C7562}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9AA935E-36BB-4AEC-992D-6A3CD1319445} = {ADC03FE8-AE7F-4997-85D7-03F6C58CBE61}
+		{4C2A8B60-21B5-4AD5-AABC-EEF9A5FF5FC4} = {9BE8081B-6AC0-4295-BDA3-1027D9DCF768}
+		{4768C3AD-6D32-4966-8261-45D22EB9F00C} = {7A24F2EA-7DA6-407A-B018-EDD0B0F395A4}
+		{C00D5884-B2CD-4330-8494-AD62D3278C5E} = {7A24F2EA-7DA6-407A-B018-EDD0B0F395A4}
+		{8BF478A5-F42B-4B16-A6FA-103A7C2C7562} = {9BE8081B-6AC0-4295-BDA3-1027D9DCF768}
 	EndGlobalSection
 EndGlobal
