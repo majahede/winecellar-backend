@@ -12,6 +12,8 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+services.AddCors(options => options.AddPolicy("_AllowedSpecificOrigins", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 services.AddSingleton<FakeDataStore>();
 
 DependencyInjection.AddDependencyInjection(services);
@@ -26,6 +28,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors("_AllowedSpecificOrigins");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
