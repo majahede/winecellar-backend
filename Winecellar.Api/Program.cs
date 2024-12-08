@@ -1,3 +1,4 @@
+using Serilog;
 using Winecellar;
 using Winecellar.Api.DependencyInjection;
 using Winecellar.Api.Middlewares;
@@ -18,6 +19,9 @@ services.AddSingleton<FakeDataStore>();
 
 DependencyInjection.AddDependencyInjection(services);
 
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
