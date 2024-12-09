@@ -5,6 +5,7 @@ using Winecellar.Application.Queries.Wines;
 using Winecellar.Application.Commands.Wines;
 using Winecellar.Domain.Models;
 using Winecellar.Api.Controllers;
+using Winecellar.Application.Dtos.Wines;
 
 namespace Winecellar.Controllers
 {
@@ -18,17 +19,17 @@ namespace Winecellar.Controllers
         [HttpGet]
         public async Task<ActionResult> GetWines()
         {
-            var wines = await _mediator.Send(new GetWinesQuery());
+            var wines = await _mediator.Send(new GetAllWinesQuery());
             _logger.LogInformation("Test log");
 
             return Ok(wines);
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddWine([FromBody] Wine wine)
+        public async Task<ActionResult> AddWine([FromBody] CreateWineRequestDto wine)
         {
             {
-                await _mediator.Send(new AddWineCommand(wine));
+                await _mediator.Send(new CreateWineCommand(wine));
 
                 return StatusCode(201);
             }
