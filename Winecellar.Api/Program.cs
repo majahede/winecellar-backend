@@ -8,10 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Winecellar.Application;
 using Microsoft.Extensions.Options;
 using Winecellar.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Winecellar.Infrastructure.Security;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+var configurationBuilder = builder.Configuration.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
     .AddJsonFile("Properties/appsettings.json")
     .AddJsonFile($"Properties/appsettings.{builder.Environment.EnvironmentName}.json")
     .AddEnvironmentVariables()
@@ -31,6 +35,29 @@ services.AddCors(options => options.AddPolicy("_AllowedSpecificOrigins", builder
 
 services.AddDbContext<AppDbContext>(options =>
        options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionString")));
+
+var tokenConfig = configurationBuilder.GetSection("TokenConfig");
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = tokenConfig.Get<TokenConfig>().Issuer,
+            ValidAudience = tokenConfig.Get<TokenConfig>().Audience,
+            IssuerSigningKey =
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfig
+                    .Get<TokenConfig>()
+                    .SecretKey))
+        };
+    });
 
 DependencyInjection.AddRepositories(services);
 
@@ -59,6 +86,7 @@ app.UseCors("_AllowedSpecificOrigins");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
