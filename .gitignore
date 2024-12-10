@@ -518,6 +518,10 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+
+appsettings.ProductionLocal.json
+
+
 # JetBrains Rider
 
 ### VisualStudio ###
