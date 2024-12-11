@@ -6,6 +6,7 @@ using Winecellar.Application.Commands.Wines;
 using Winecellar.Domain.Models;
 using Winecellar.Api.Controllers;
 using Winecellar.Application.Dtos.Wines;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Winecellar.Controllers
 {
@@ -20,7 +21,6 @@ namespace Winecellar.Controllers
         public async Task<ActionResult> GetWines()
         {
             var wines = await _mediator.Send(new GetAllWinesQuery());
-            _logger.LogInformation("Test log");
 
             return Ok(wines);
         }

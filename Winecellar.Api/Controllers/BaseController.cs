@@ -11,10 +11,6 @@ namespace Winecellar.Api.Controllers
 
         protected BaseController(IMediator mediator) => _mediator = mediator;
 
-        /// <summary>
-        /// Returns the bearer token from the Request.
-        /// </summary>
-        /// <returns>Token</returns>
         protected string CurrentToken
         {
             get

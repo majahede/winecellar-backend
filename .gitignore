@@ -519,6 +519,8 @@ FodyWeavers.xsd
 *.msp
 
 Winecellar.Api/Properties/appsettings.ProductionLocal.json
+Winecellar.Api/Logs
+
 
 # JetBrains Rider
 
