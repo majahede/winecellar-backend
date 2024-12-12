@@ -1,12 +1,7 @@
-﻿using System.Data;
-using Dapper;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
 using Winecellar.Application.Common.Interfaces;
 using Winecellar.Application.Dtos.Wines;
 using Winecellar.Domain.Models;
-using Winecellar.Infrastructure.Context;
-
 
 namespace Winecellar.Infrastructure.Repositories
 {
@@ -22,7 +17,7 @@ namespace Winecellar.Infrastructure.Repositories
 
         public async Task<IEnumerable<Wine>> GetAllWines()
         {
-            var query = "SELECT Id, Name FROM wines";
+            var query = "SELECT id, name FROM wines";
 
             await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
             return await dbConnection.QueryAsync<Wine>(query);
@@ -32,7 +27,7 @@ namespace Winecellar.Infrastructure.Repositories
         {
             const string sql =
             @"
-                INSERT INTO wines (id, `name`)
+                INSERT INTO wines (id, name)
                 VALUES (@Id, @Name)
             ";
 

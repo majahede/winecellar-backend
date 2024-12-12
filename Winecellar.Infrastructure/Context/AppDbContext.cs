@@ -13,7 +13,7 @@ namespace Winecellar.Infrastructure.Context
         {
             base.OnModelCreating(modelBuilder);
             // Additional configurations
-           
+
             DataSeeder.SeedData(modelBuilder);
 
             Wine.Configure(modelBuilder);
