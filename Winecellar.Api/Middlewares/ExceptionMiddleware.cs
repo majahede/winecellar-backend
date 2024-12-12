@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging.Console;
-using System.Data;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json;
 
 namespace Winecellar.Api.Middlewares

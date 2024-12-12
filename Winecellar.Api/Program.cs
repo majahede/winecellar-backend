@@ -1,7 +1,4 @@
-using Microsoft.Extensions.Configuration;
 using Serilog;
-using Winecellar;
-using Winecellar.Api.DependencyInjection;
 using Winecellar.Api.Middlewares;
 using Winecellar.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Winecellar.Infrastructure.Security;
+using Winecellar.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +57,7 @@ builder.Services.AddAuthentication(opt => {
         };
     });
 
-DependencyInjection.AddRepositories(services);
+services.AddRepositories();
 
 services.Configure<ConnectionStrings>(builder.Configuration.GetSection("ConnectionStrings"));
 services.AddSingleton(provider => provider.GetRequiredService<IOptions<ConnectionStrings>>().Value);

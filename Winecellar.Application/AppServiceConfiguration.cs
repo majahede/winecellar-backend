@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Winecellar.Application
 {
-    public static class ApplicationDependencyInjection
+    public static class AppServiceConfiguration
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {

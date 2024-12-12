@@ -1,9 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using Winecellar.Domain.Models;
-using System;
-using System.Collections.Generic;
-
 
 namespace Winecellar.Infrastructure.Context
 {

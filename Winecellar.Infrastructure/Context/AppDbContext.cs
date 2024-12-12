@@ -12,7 +12,6 @@ namespace Winecellar.Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Additional configurations
 
             DataSeeder.SeedData(modelBuilder);
 

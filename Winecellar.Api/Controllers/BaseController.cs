@@ -15,7 +15,7 @@ namespace Winecellar.Api.Controllers
         {
             get
             {
-                string authorization = Request.Headers["Authorization"];
+                string authorization = Request.Headers.Authorization;
 
                 return authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase)
                     ? authorization["Bearer ".Length..].Trim()
