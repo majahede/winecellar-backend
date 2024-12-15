@@ -6,10 +6,12 @@ namespace Winecellar.Api.Middlewares
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
             _next = next;
+            _logger = logger;  
         }
 
         public async Task Invoke(HttpContext context)
@@ -26,6 +28,9 @@ namespace Winecellar.Api.Middlewares
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+
+            _logger.LogError(exception, "An unhandled exception occurred while processing the request.");
+            
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 

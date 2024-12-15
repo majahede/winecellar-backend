@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Moq;
 using Winecellar.Application.Commands.Wines;
 using Winecellar.Application.Dtos.Wines;
@@ -12,19 +11,17 @@ namespace Winecellar.Test.Controllers
 {
     public class WineControllerTests
     {
-        private readonly Mock<ILogger<WineController>> _loggerMock;
         private readonly Mock<IMediator> _mediatorMock;
         private readonly WineController _controller;
 
         public WineControllerTests()
         {
-            _loggerMock = new Mock<ILogger<WineController>>();
             _mediatorMock = new Mock<IMediator>();
-            _controller = new WineController(_loggerMock.Object, _mediatorMock.Object);
+            _controller = new WineController(_mediatorMock.Object);
         }
 
         [Fact]
-        public async Task GetAllWines_WithValidReequest_ReturnOkWithWineList()
+        public async Task GetAllWines_WithValidRequest_ReturnOkWithWineList()
         {
             var wineList = new List<Wine>
             {

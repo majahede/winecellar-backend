@@ -8,7 +8,6 @@ namespace Winecellar.Api.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
-        private readonly ILogger<AuthController> _logger;
-        public AuthController(ILogger<AuthController> logger, IMediator mediator) : base(mediator) => _logger = logger;
+        public AuthController(IMediator mediator) : base(mediator) { }
     }
 }

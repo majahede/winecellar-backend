@@ -12,8 +12,7 @@ namespace Winecellar.Controllers
     [ApiController]
     public class WineController : BaseController
     {
-        private readonly ILogger<WineController> _logger;
-        public WineController(ILogger<WineController> logger, IMediator mediator) : base(mediator) => _logger = logger;
+        public WineController(IMediator mediator) : base(mediator){}
 
         [HttpGet]
         public async Task<ActionResult<List<WineDto>>> GetWines()

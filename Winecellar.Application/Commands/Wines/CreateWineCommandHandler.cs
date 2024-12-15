@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using Winecellar.Application.Commands.Wines;
 using Winecellar.Application.Common.Interfaces;
 
 namespace Winecellar.Application.Commands.Wines
@@ -7,12 +9,14 @@ namespace Winecellar.Application.Commands.Wines
     {
         private readonly IWineRepository _wineRepository;
 
-        public CreateWineCommandHandler(IWineRepository wineRepository) => _wineRepository = wineRepository;
+        public CreateWineCommandHandler(IWineRepository wineRepository)
+        {
+            _wineRepository = wineRepository;
+        }
 
         public async Task<Guid> Handle(CreateWineCommand request, CancellationToken cancellationToken)
         {
-            return await _wineRepository.CreateWine(request.wine);
-
+                return await _wineRepository.CreateWine(request.wine);
         }
     }
 }
