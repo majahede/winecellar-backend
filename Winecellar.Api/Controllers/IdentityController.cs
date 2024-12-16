@@ -8,9 +8,10 @@ namespace Winecellar.Api.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class IdentityController : BaseController
+    public class IdentityController : ControllerBase
     {
-        public IdentityController(IMediator mediator) : base(mediator) { }
+        internal readonly IMediator _mediator;
+        public IdentityController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
         [Route("register")]

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Winecellar.Application.Queries.Wines;
 using Winecellar.Application.Commands.Wines;
-using Winecellar.Api.Controllers;
 using Winecellar.Application.Dtos.Wines;
 using Microsoft.AspNetCore.Authorization;
 
@@ -10,9 +9,10 @@ namespace Winecellar.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class WineController : BaseController
+    public class WineController : ControllerBase
     {
-        public WineController(IMediator mediator) : base(mediator){}
+        internal readonly IMediator _mediator;
+        public WineController(IMediator mediator) => _mediator = mediator;
 
         [HttpGet]
         public async Task<ActionResult<List<WineDto>>> GetWines()
