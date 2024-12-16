@@ -15,12 +15,7 @@ namespace Winecellar.Application.Commands.Identity
 
         public async Task<TokenDto> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            return new TokenDto
-            {
-                AccessToken = "accessToken",
-                RefreshToken = "refreshToken"
-                
-            };
+            throw new NotImplementedException();
         }
     }
 }

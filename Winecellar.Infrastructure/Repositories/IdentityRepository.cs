@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Winecellar.Infrastructure.Repositories
 {
-    internal class AuthRepository
+    public class IdentityRepository
     {
     }
 }
