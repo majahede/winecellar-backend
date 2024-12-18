@@ -1,14 +1,16 @@
-﻿namespace Winecellar.Infrastructure.Security
+﻿using Winecellar.Application.Common.Interfaces;
+
+namespace Winecellar.Infrastructure.Security
 {
-    public static class PasswordHandler
+    public class PasswordHandler : IPasswordHandler
     {
 
-        public static string HashPassword(string password)
+        public string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
         }
 
-        public static bool VerifyPassword(string providedPassword, string hashedPassword) => BCrypt.Net.BCrypt.Verify(providedPassword, hashedPassword);
+        public bool VerifyPassword(string providedPassword, string hashedPassword) => BCrypt.Net.BCrypt.Verify(providedPassword, hashedPassword);
     }
     
 }

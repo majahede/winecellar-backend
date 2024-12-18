@@ -8,6 +8,7 @@ namespace Winecellar.Api
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IIdentityRepository, IdentityRepository>();
             services.AddScoped<IWineRepository, WineRepository>();
             return services;
 

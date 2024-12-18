@@ -10,6 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Winecellar.Infrastructure.Security;
 using Winecellar.Api;
+using Winecellar.Infrastructure.Security.Interfaces;
+using Winecellar.Application.Common.Interfaces;
+using Dapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +33,8 @@ services.AddSwaggerGen();
 services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 services.AddCors(options => options.AddPolicy("_AllowedSpecificOrigins", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
+DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 services.AddDbContext<AppDbContext>(options =>
        options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionString")));
@@ -56,6 +61,9 @@ builder.Services.AddAuthentication(opt => {
                     .SecretKey))
         };
     });
+
+services.AddScoped<ITokenHandler, Winecellar.Infrastructure.Security.TokenHandler>();
+services.AddScoped<IPasswordHandler, PasswordHandler>();
 
 services.AddRepositories();
 
