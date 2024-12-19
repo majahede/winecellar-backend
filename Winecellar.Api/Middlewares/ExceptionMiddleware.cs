@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using FluentValidation;
+using System.Net;
 using System.Text.Json;
 
 namespace Winecellar.Api.Middlewares
@@ -28,20 +29,36 @@ namespace Winecellar.Api.Middlewares
 
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-
             _logger.LogError(exception, "An unhandled exception occurred while processing the request.");
-            
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            HttpStatusCode code = HttpStatusCode.InternalServerError;
+            var result = JsonSerializer.Serialize(
+                  new
+                  {
+                      error = "Something went wrong. Please try again.",
+                  });
 
-            var response = new
+            switch (exception)
             {
-                context.Response.StatusCode,
-                exception.Message,
-                Details = exception.InnerException?.Message
-            };
+                case ValidationException:
+                    code = HttpStatusCode.BadRequest;
 
-            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
+                    result = JsonSerializer.Serialize(
+                       new
+                       {
+                           error = exception.Message
+                       });
+
+                    _logger.LogError(exception, "BadRequestException");
+                    break;
+
+                default:
+                    _logger.LogError(exception, "InternalServerError");
+                    break;
+            }
+
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)code;
+            return context.Response.WriteAsync(result);
         }
     }
 }

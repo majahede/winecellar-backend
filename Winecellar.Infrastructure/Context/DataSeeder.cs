@@ -23,6 +23,26 @@ namespace Winecellar.Infrastructure.Context
                 }
             };
 
+            var users = new List<User>
+            {
+                new()
+                {
+                    Id = Guid.Parse("80967cc2-9bef-4620-8a7d-15e55a1d2231"),
+                    Username = "User1",
+                    Email = "user1@mail.com",
+                    Password = "123"
+
+                },
+                new()
+                {
+                    Id = Guid.Parse("34cc7e90-39de-41f3-b5db-a86b0c4e9008"),
+                    Username = "User2",
+                    Email = "user2@mail.com",
+                    Password = "123"
+                }
+            };
+
+            modelBuilder.Entity<User>().HasData(users);
             modelBuilder.Entity<Wine>().HasData(wines);
         }
     }

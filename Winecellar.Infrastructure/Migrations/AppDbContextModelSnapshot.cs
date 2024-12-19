@@ -22,6 +22,56 @@ namespace Winecellar.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Winecellar.Domain.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("UUID")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(100)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(60)")
+                        .HasColumnName("password");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnName("username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("80967cc2-9bef-4620-8a7d-15e55a1d2231"),
+                            Email = "user1@mail.com",
+                            Password = "123",
+                            Username = "User1"
+                        },
+                        new
+                        {
+                            Id = new Guid("34cc7e90-39de-41f3-b5db-a86b0c4e9008"),
+                            Email = "user2@mail.com",
+                            Password = "123",
+                            Username = "User2"
+                        });
+                });
+
             modelBuilder.Entity("Winecellar.Domain.Models.Wine", b =>
                 {
                     b.Property<Guid>("Id")
@@ -50,11 +100,6 @@ namespace Winecellar.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("9ac1e64a-417f-4a3e-ab83-82478d2331e7"),
-                            Name = "Wine 2"
-                        },
-                        new
-                        {
-                            Id = new Guid("9bc1e64a-417f-4a3e-ab83-82478d2331e8"),
                             Name = "Wine 2"
                         });
                 });

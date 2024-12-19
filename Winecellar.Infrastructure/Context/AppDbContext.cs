@@ -3,10 +3,14 @@ using Winecellar.Domain.Models;
 
 namespace Winecellar.Infrastructure.Context
 {
-    public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+    public class AppDbContext: DbContext
     {
         public DbSet<Wine> Wines { get; set; }
         public DbSet<Wine> Users { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -15,6 +19,7 @@ namespace Winecellar.Infrastructure.Context
             DataSeeder.SeedData(modelBuilder);
 
             Wine.Configure(modelBuilder);
+            User.Configure(modelBuilder);
         }
     }   
 }

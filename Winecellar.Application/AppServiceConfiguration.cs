@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Winecellar.Application.Common.Validators.Identity;
 
 namespace Winecellar.Application
 {
@@ -9,6 +11,7 @@ namespace Winecellar.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddValidatorsFromAssemblyContaining<RegisterUserRequestDtoValidator>();
 
             return services;
         }
