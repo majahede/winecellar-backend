@@ -21,7 +21,7 @@ namespace Winecellar.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPost] 
         public async Task<ActionResult<Guid>> CreateWine([FromBody] CreateWineRequestDto wine)
         {
             {

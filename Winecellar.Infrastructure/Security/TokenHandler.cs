@@ -20,6 +20,7 @@ namespace Winecellar.Infrastructure.Security
 
         public string GenerateAccessToken(IEnumerable<Claim> userClaims)
         {
+            var a = _tokenConfig.Value.SecretKey;
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenConfig.Value.SecretKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

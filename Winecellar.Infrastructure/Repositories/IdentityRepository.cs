@@ -15,7 +15,7 @@ namespace Winecellar.Infrastructure.Repositories
         public async Task<User?> GetByUsernameOrEmail(string loginInput)
         {
             const string sql = @"
-                SELECT id, username, email, password_hash 
+                SELECT id, username, email, password
                 FROM users 
                 WHERE username = @LoginInput OR email = @LoginInput";
 
@@ -52,9 +52,25 @@ namespace Winecellar.Infrastructure.Repositories
             return id;
         }
 
-        public Task StoreRefreshToken(string refreshToken, Guid id)
+        public async Task StoreRefreshToken(string token, Guid userId)
         {
-            throw new NotImplementedException();
+            const string sql =
+            @"
+                INSERT INTO refresh_tokens (id, user_id, token)
+                VALUES (@Id, @UserId, @Token)
+            ";
+
+            var id = Guid.NewGuid();
+
+            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+
+            await dbConnection.ExecuteScalarAsync(
+                sql, new
+                {
+                    Id = id,
+                    Token = token,
+                    UserId = userId
+                });
         }
     }
 }

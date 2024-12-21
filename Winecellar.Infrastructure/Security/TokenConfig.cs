@@ -1,6 +1,5 @@
 namespace Winecellar.Infrastructure.Security
 {
-
     public class TokenConfig
     {
         public string Audience { get; set; } = null!;

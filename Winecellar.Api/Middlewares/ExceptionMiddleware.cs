@@ -31,6 +31,7 @@ namespace Winecellar.Api.Middlewares
         {
             _logger.LogError(exception, "An unhandled exception occurred while processing the request.");
             HttpStatusCode code = HttpStatusCode.InternalServerError;
+
             var result = JsonSerializer.Serialize(
                   new
                   {
