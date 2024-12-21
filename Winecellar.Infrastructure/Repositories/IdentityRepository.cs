@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Winecellar.Application.Common.Interfaces;
+using Winecellar.Domain.Models;
 
 namespace Winecellar.Infrastructure.Repositories
 {
@@ -9,6 +10,22 @@ namespace Winecellar.Infrastructure.Repositories
         public IdentityRepository(ConnectionStrings connectionStrings)
         {
             _connectionStrings = connectionStrings;
+        }
+
+        public async Task<User?> GetByUsernameOrEmail(string loginInput)
+        {
+            const string sql = @"
+                SELECT id, username, email, password_hash 
+                FROM users 
+                WHERE username = @LoginInput OR email = @LoginInput";
+
+            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+
+            return await dbConnection.QueryFirstOrDefaultAsync<User>(
+               sql, new
+               {
+                   LoginInput = loginInput
+               });
         }
 
         public async Task<Guid> RegisterUser(string email, string username, string password)
@@ -33,6 +50,11 @@ namespace Winecellar.Infrastructure.Repositories
             });
 
             return id;
+        }
+
+        public Task StoreRefreshToken(string refreshToken, Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

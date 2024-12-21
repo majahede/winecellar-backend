@@ -64,7 +64,7 @@ builder.Services.AddAuthentication(opt => {
     });
 
 services.AddScoped<ITokenHandler, Winecellar.Infrastructure.Security.TokenHandler>();
-services.AddScoped<IPasswordHandler, PasswordHandler>();
+services.AddSingleton<IPasswordHandler, PasswordHandler>();
 
 services.AddRepositories();
 

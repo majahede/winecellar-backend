@@ -17,10 +17,10 @@ namespace Winecellar.Infrastructure.Repositories
 
         public async Task<IEnumerable<Wine>> GetAllWines()
         {
-            var query = "SELECT id, name FROM wines";
+            var sql = "SELECT id, name FROM wines";
 
             await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
-            return await dbConnection.QueryAsync<Wine>(query);
+            return await dbConnection.QueryAsync<Wine>(sql);
         }
 
         public async Task<Guid> CreateWine(CreateWineRequestDto request)

@@ -18,7 +18,7 @@ namespace Winecellar.Infrastructure.Security
             _tokenHandler = new JwtSecurityTokenHandler();
         }
 
-        public string GenerateJsonWebToken(IEnumerable<Claim> userClaims)
+        public string GenerateAccessToken(IEnumerable<Claim> userClaims)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenConfig.Value.SecretKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -32,6 +32,11 @@ namespace Winecellar.Infrastructure.Security
 
 
             return _tokenHandler.WriteToken(token);
+        }
+
+        public string GenerateRefreshToken(string email)
+        {
+            throw new NotImplementedException();
         }
     }
 }
