@@ -14,7 +14,7 @@ namespace Winecellar.Api.Controllers
         public IdentityController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost]
-        [Route("register")]
+        [Route("register")] //api/v1/identity/register
         public async Task<ActionResult> RegisterAccount([FromBody] RegisterUserRequestDto registerUserRequestDto)
         {
             await _mediator.Send( new RegisterUserCommand(registerUserRequestDto));
@@ -23,7 +23,7 @@ namespace Winecellar.Api.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("login")] //api/v1/identity/login
         public async Task<ActionResult<TokenDto>> Login(LoginUserRequestDto loginUserRequestDto)
         {
             return Ok( await _mediator.Send(new LoginUserCommand(loginUserRequestDto)));
