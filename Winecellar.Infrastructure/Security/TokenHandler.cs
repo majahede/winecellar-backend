@@ -30,13 +30,27 @@ namespace Winecellar.Infrastructure.Security
                 expires: DateTime.Now.AddSeconds(_tokenConfig.Value.AccessTokenExpiration),
                 signingCredentials: credentials);
 
-
             return _tokenHandler.WriteToken(token);
         }
 
         public string GenerateRefreshToken(string email)
         {
-            throw new NotImplementedException();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenConfig.Value.SecretKey));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Email, email)
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: _tokenConfig.Value.Issuer,
+                audience: _tokenConfig.Value.Audience,
+                claims: claims,
+                expires: DateTime.Now.AddSeconds(_tokenConfig.Value.RefreshTokenExpiration),
+                signingCredentials: credentials);
+
+            return _tokenHandler.WriteToken(token);
         }
     }
 }

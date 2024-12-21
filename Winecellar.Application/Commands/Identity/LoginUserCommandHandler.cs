@@ -40,7 +40,6 @@ namespace Winecellar.Application.Commands.Identity
 
             await _identityRepository.StoreRefreshToken(refreshToken, user.Id);
 
-
             return new TokenDto
             {
                 AccessToken = accessToken,

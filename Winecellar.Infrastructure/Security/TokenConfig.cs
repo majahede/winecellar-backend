@@ -7,5 +7,6 @@ namespace Winecellar.Infrastructure.Security
         public string Issuer { get; set; } = null!;
         public string SecretKey { get; set; } = null!;
         public long AccessTokenExpiration { get; set; }
+        public long RefreshTokenExpiration { get; set; }
     }
 }

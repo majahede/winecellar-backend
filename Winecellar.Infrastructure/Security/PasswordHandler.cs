@@ -12,5 +12,4 @@ namespace Winecellar.Infrastructure.Security
 
         public bool VerifyPassword(string providedPassword, string hashedPassword) => BCrypt.Net.BCrypt.Verify(providedPassword, hashedPassword);
     }
-    
 }
