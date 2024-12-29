@@ -98,7 +98,7 @@ namespace Winecellar.Test.Controllers
         {
             var invalidWine = new CreateWineRequestDto
             {
-                Name = null
+                Name = ""
             };
 
             _mediatorMock.Setup(m => m.Send(It.IsAny<CreateWineCommand>(), default))
