@@ -1,7 +1,6 @@
 ﻿
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Winecellar.Api.Controllers;
