@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System.Data;
 using Winecellar.Application.Common.Interfaces;
 using Winecellar.Domain.Models;
 
@@ -6,10 +7,11 @@ namespace Winecellar.Infrastructure.Repositories
 {
     public class IdentityRepository : IIdentityRepository
     {
-        private readonly ConnectionStrings _connectionStrings;
-        public IdentityRepository(ConnectionStrings connectionStrings)
+        private readonly Func<IDbConnection> _dbConnectionFactory;
+
+        public IdentityRepository(Func<IDbConnection> dbConnectionFactory)
         {
-            _connectionStrings = connectionStrings;
+            _dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<User?> GetByUsernameOrEmail(string loginInput)
@@ -19,7 +21,7 @@ namespace Winecellar.Infrastructure.Repositories
                 FROM users 
                 WHERE username = @LoginInput OR email = @LoginInput";
 
-            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+            using var dbConnection = _dbConnectionFactory.Invoke();
 
             return await dbConnection.QueryFirstOrDefaultAsync<User>(
                sql, new
@@ -38,9 +40,9 @@ namespace Winecellar.Infrastructure.Repositories
 
             var id = Guid.NewGuid();
 
-            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+            using var dbConnection = _dbConnectionFactory.Invoke();
 
-            await dbConnection.ExecuteScalarAsync(sql, new
+            await dbConnection.ExecuteAsync(sql, new
             {
                 Id = id,
                 Email = email,
@@ -62,9 +64,9 @@ namespace Winecellar.Infrastructure.Repositories
 
             var id = Guid.NewGuid();
 
-            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+            using var dbConnection = _dbConnectionFactory.Invoke();
 
-            await dbConnection.ExecuteScalarAsync(
+            await dbConnection.ExecuteAsync(
                 sql, new
                 {
                     Id = id,

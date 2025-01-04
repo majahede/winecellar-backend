@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using System.Data;
 using Winecellar.Application.Common.Interfaces;
 using Winecellar.Application.Dtos.Wines;
 using Winecellar.Domain.Models;
@@ -7,19 +8,19 @@ namespace Winecellar.Infrastructure.Repositories
 {
     public class WineRepository : IWineRepository
     {
-        private readonly ConnectionStrings _connectionStrings;
+        private readonly Func<IDbConnection> _dbConnectionFactory;
 
-        public WineRepository(ConnectionStrings connectionStrings)
+        public WineRepository(Func<IDbConnection> dbConnectionFactory)
         {
-            _connectionStrings = connectionStrings;
-            DefaultTypeMap.MatchNamesWithUnderscores = true;
+            _dbConnectionFactory = dbConnectionFactory;
         }
 
         public async Task<IEnumerable<Wine>> GetAllWines()
         {
             var sql = "SELECT id, name FROM wines";
 
-            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+            using var dbConnection = _dbConnectionFactory.Invoke();
+            
             return await dbConnection.QueryAsync<Wine>(sql);
         }
 
@@ -33,9 +34,9 @@ namespace Winecellar.Infrastructure.Repositories
 
             var id = Guid.NewGuid();
 
-            await using var dbConnection = new Npgsql.NpgsqlConnection(_connectionStrings.DbConnectionString);
+            using var dbConnection = _dbConnectionFactory.Invoke();
 
-            await dbConnection.ExecuteScalarAsync(sql, new
+            await dbConnection.ExecuteAsync(sql, new
             {
                 Id = id,
                 request.Name

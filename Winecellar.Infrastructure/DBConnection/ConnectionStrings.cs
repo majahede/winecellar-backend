@@ -1,4 +1,4 @@
-﻿namespace Winecellar.Infrastructure
+﻿namespace Winecellar.Infrastructure.DBConnection
 {
     public class ConnectionStrings
     {

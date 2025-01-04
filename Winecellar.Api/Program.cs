@@ -4,7 +4,6 @@ using Winecellar.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Winecellar.Application;
 using Microsoft.Extensions.Options;
-using Winecellar.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -13,6 +12,7 @@ using Winecellar.Api;
 using Winecellar.Infrastructure.Security.Interfaces;
 using Winecellar.Application.Common.Interfaces;
 using Dapper;
+using Winecellar.Infrastructure.DBConnection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +21,8 @@ var configurationBuilder = builder.Configuration.SetBasePath(AppDomain.CurrentDo
     .AddJsonFile($"Properties/appsettings.{builder.Environment.EnvironmentName}.json")
     .AddEnvironmentVariables()
     .Build();
+
+DefaultTypeMap.MatchNamesWithUnderscores = true; 
 
 var services = builder.Services;
 
@@ -35,10 +37,10 @@ services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Asse
 
 services.AddCors(options => options.AddPolicy("_AllowedSpecificOrigins", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
-DefaultTypeMap.MatchNamesWithUnderscores = true;
-
 services.AddDbContext<AppDbContext>(options =>
        options.UseNpgsql(builder.Configuration.GetConnectionString("DbConnectionString")));
+
+services.AddSingleton(_ => DbConnectionFactory.CreateFactory(builder.Configuration.GetConnectionString("DbConnectionString")));
 
 var tokenConfig = configurationBuilder.GetSection("TokenConfig");
 
